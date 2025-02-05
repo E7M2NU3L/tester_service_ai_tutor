@@ -1,0 +1,19 @@
+version: '3.9'
+
+services:
+  fastapi:
+    build: .
+    container_name: ai_tester_service
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app
+    environment:
+      - PYTHONUNBUFFERED=1
+    networks:
+      - app-network
+    command: uvicorn src.main:app --reload
+
+networks:
+  app-network:
+    driver: bridge
